@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Install e-BASA</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/favicon-32.png"><meta name="theme-color" content="#17324d">
+<style>body{margin:0;font:17px/1.5 system-ui,sans-serif;background:#17324d;color:#fff;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
+.c{max-width:420px;text-align:center}img{width:110px;border-radius:24px}h1{margin:.4em 0 0}p{opacity:.9}
+button,a.b{display:block;width:100%;box-sizing:border-box;margin:14px 0;padding:16px;border:0;border-radius:16px;background:#ffd24d;color:#17324d;font:800 20px system-ui;text-decoration:none;cursor:pointer}
+a.s{background:transparent;color:#fff;border:2px solid #fff6;font-size:17px}.n{font-size:15px;background:#ffffff18;border-radius:14px;padding:12px;text-align:left}[hidden]{display:none!important}</style></head><body><div class="c">
+<img src="icons/icon-192.png" alt=""><h1>e-BASA</h1><p>An Offline Reading Companion</p>
+<button id="inst">📲 Install e-BASA on this phone</button>
+<div id="ios" class="n" hidden><b>iPhone / iPad:</b> open this page in <b>Safari</b>, tap the <b>Share</b> button, then <b>Add to Home Screen</b>.</div>
+<div id="chr" hidden><a class="b" id="open" href="#">Open in Chrome</a><p class="n">This page works best in Google Chrome. Tap the button above, then tap <b>Install e-BASA</b>.</p></div>
+<div id="man" class="n" hidden>If the install button does not appear: tap the browser menu <b>⋮</b> then <b>Install app</b> or <b>Add to Home screen</b>.</div>
+<a class="b s" href="index.html">Just open e-BASA now</a></div>
+<script>
+var d=null,ua=navigator.userAgent,ios=/iPhone|iPad|iPod/i.test(ua),and=/Android/i.test(ua),chrome=/Chrome\//.test(ua)&&!/EdgA|OPR|SamsungBrowser|FB_IAB|FBAN|FBAV|Instagram|Line\//.test(ua)&&!/; wv\)/.test(ua);
+var st=matchMedia('(display-mode: standalone)').matches||navigator.standalone;if(st)location.replace('index.html');
+var b=document.getElementById('inst');
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();d=e;b.hidden=false});
+window.addEventListener('appinstalled',function(){b.textContent='✅ Installed! Open e-BASA from your home screen.';b.disabled=true});
+b.onclick=function(){if(d){d.prompt();d.userChoice.then(function(){d=null})}else document.getElementById('man').hidden=false};
+if(ios){b.hidden=true;document.getElementById('ios').hidden=false}
+else{if(and&&!chrome){document.getElementById('chr').hidden=false;var u=location.href.replace(/^https?:\/\//,'');document.getElementById('open').href='intent://'+u+'#Intent;scheme=https;package=com.android.chrome;end'}
+setTimeout(function(){if(!d&&!ios)document.getElementById('man').hidden=false},2500)}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+</script></body></html>
